@@ -24,5 +24,10 @@ public class Bullet : MonoBehaviour
         Destroy(this.gameObject, this.lifeTime);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(this.gameObject);
+    }
+
 
 }
