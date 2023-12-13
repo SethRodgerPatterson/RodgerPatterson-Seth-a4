@@ -10,11 +10,7 @@ public class PLayer : MonoBehaviour
     private float turnDirect;
     private Rigidbody2D RigidBody;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Bullet Bullet;
 
     private void Awake()
     {
@@ -25,6 +21,7 @@ public class PLayer : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        //Movement inputs
         Thrust = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -39,10 +36,16 @@ public class PLayer : MonoBehaviour
             turnDirect = 0.0f;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
     }
 
     private void FixedUpdate()
     {
+
+        //Collisions
         if (Thrust)
         {
             RigidBody.AddForce(this.transform.up * ThrustSpeed);
@@ -53,6 +56,16 @@ public class PLayer : MonoBehaviour
             RigidBody.AddTorque(turnDirect * this.TurnSpeed);
 
         }
+
+    }
+
+    private void Shoot()
+    {
+        // Calls bullet and applys player position and rotation
+        Bullet bullet = Instantiate(this.Bullet,this.transform.position,this.transform.rotation);
+        bullet.Projection(this.transform.up);
+
+
 
     }
 

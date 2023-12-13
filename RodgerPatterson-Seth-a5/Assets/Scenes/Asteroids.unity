@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 2063196239}
   - component: {fileID: 2063196238}
   - component: {fileID: 2063196242}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -604,6 +604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ThrustSpeed: 5
   TurnSpeed: 0.4
+  Bullet: {fileID: -6797273011025358378, guid: c606ffe0356170043b73c9bc5f4463c8, type: 3}
 --- !u!1 &2121691762
 GameObject:
   m_ObjectHideFlags: 0
