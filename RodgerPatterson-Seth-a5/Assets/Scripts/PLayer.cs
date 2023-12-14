@@ -27,7 +27,8 @@ public class PLayer : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             turnDirect = 1.0f;
-        }else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             turnDirect = -1.0f;
         }
@@ -62,7 +63,7 @@ public class PLayer : MonoBehaviour
     private void Shoot()
     {
         // Calls bullet and applys player position and rotation
-        Bullet bullet = Instantiate(this.Bullet,this.transform.position,this.transform.rotation);
+        Bullet bullet = Instantiate(this.Bullet, this.transform.position, this.transform.rotation);
         bullet.Projection(this.transform.up);
 
 
@@ -70,4 +71,20 @@ public class PLayer : MonoBehaviour
     }
 
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        // Player Hits Asteroids (Dies)
+        if (collision.gameObject.tag == "Asteroid")
+        {
+            RigidBody.velocity = Vector3.zero;
+            RigidBody.angularDrag = 0.0f;
+
+            this.gameObject.SetActive(false);
+
+            
+        }
+
+
+    }
 }
