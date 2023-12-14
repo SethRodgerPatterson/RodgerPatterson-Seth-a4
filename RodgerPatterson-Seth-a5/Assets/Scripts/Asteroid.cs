@@ -11,7 +11,7 @@ public class Asteroid : MonoBehaviour
 
     public float size = 1.0f;
     public float minSize = 0.5f;
-    public float maxSize = 1.0f;
+    public float maxSize = 2.0f;
     public float speed = 50f;
     public float lifeTime = 40f;
 
@@ -44,7 +44,7 @@ public class Asteroid : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            if ((this.size * 0.5f) >= this.minSize)
+            if ((this.size * 0.5f) >= minSize)
             {
                 CreateSplit();
                 CreateSplit();
