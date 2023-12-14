@@ -28,39 +28,39 @@ public class Asteroid : MonoBehaviour
     {
         spriteRen.sprite = sprites[Random.Range(0, sprites.Length)];
 
-        this.transform.eulerAngles = new Vector3(0.0f,0.0f,Random.value * 360.0f);
-        this.transform.localScale = Vector3.one * this.size;
+        transform.eulerAngles = new Vector3(0.0f,0.0f,Random.value * 360.0f);
+        transform.localScale = Vector3.one * size;
 
-        RigidBody.mass = this.size;
+        RigidBody.mass = size;
     }
 
     public void SetTrajector(Vector3 direction)
     {
-        RigidBody.AddForce(direction * this.speed);
-        Destroy(this.gameObject, this.lifeTime);
+        RigidBody.AddForce(direction * speed);
+        Destroy(gameObject, lifeTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            if ((this.size * 0.5f) >= minSize)
+            if ((size * 0.5f) >= minSize)
             {
                 CreateSplit();
                 CreateSplit();
             }
             
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
 
     }
     private void CreateSplit()
     {
-        Vector2 Pos = this.transform.position;
+        Vector2 Pos = transform.position;
         Pos += Random.insideUnitCircle * 0.5f;
 
-        Asteroid half = Instantiate(this,Pos, this.transform.rotation);
-        half.size = this.size * 0.5f;
+        Asteroid half = Instantiate(this,Pos, transform.rotation);
+        half.size = size * 0.5f;
 
         half.SetTrajector(Random.insideUnitCircle.normalized);
     }

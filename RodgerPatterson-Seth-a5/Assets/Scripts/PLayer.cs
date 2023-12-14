@@ -7,6 +7,7 @@ public class PLayer : MonoBehaviour
     private bool Thrust;
     public float ThrustSpeed = 1;
     public float TurnSpeed = 1;
+    public float respawnDelay = 3f;
     public float respawnInvulnerability = 3f;
     private float turnDirect;
     private Rigidbody2D RigidBody;
@@ -51,15 +52,7 @@ public class PLayer : MonoBehaviour
             Shoot();
         }
     }
-    private void TurnOffCollisions()
-    {
-        gameObject.layer = LayerMask.NameToLayer("IgnoreCollisions");
-    }
-
-    private void TurnOnCollisions()
-    {
-        gameObject.layer = LayerMask.NameToLayer("Player");
-    }
+    
 
 
 
@@ -89,7 +82,15 @@ public class PLayer : MonoBehaviour
 
 
     }
+    private void TurnOffCollisions()
+    {
+        gameObject.layer = LayerMask.NameToLayer("IgnoreCollisions");
+    }
 
+    private void TurnOnCollisions()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Player");
+    }
 
 
 

@@ -5,11 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    private PLayer player;
-
+    public PLayer player;
     public int lives = 3;
-    public float respawnTime = 3f;
-    public float RespawnInvun = 3f;
 
 
     private void Awake()
@@ -25,20 +22,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Respawn()
-    {
-        
-        player.transform.position = Vector3.zero;
-        player.gameObject.SetActive(true);
-        
 
-
-    }
-
-    private void TurnCollisonsON()
-    {
-        this.player.gameObject.layer = LayerMask.NameToLayer("Player");
-    }
 
     private void GameOver()
     {
@@ -56,8 +40,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Invoke(nameof(Respawn), this.respawnTime);
+            player.transform.position = Vector3.zero;
+            player.gameObject.SetActive(true);
         }
+
 
     }
 }
