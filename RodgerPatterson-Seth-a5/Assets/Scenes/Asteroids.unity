@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidPrefab: {fileID: 389825550896303185, guid: d38e8b54abe014e46a7276e43ee16263, type: 3}
-  spawnRate: 2
+  spawnRate: 1
   spawnCount: 1
   spawnDis: 15
   trajRotDegree: 15
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThrustSpeed: 5
-  TurnSpeed: 0.4
+  TurnSpeed: 0.2
   Bullet: {fileID: -6797273011025358378, guid: c606ffe0356170043b73c9bc5f4463c8, type: 3}
 --- !u!1 &2121691762
 GameObject:
