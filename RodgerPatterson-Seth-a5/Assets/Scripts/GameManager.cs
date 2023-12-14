@@ -29,7 +29,18 @@ public class GameManager : MonoBehaviour
         Explostion.transform.position = asteroid.transform.position;
         Explostion.Play();
 
-
+        if (asteroid.size < 0.7f)
+        {
+            score = score + 100; // small asteroid
+        }
+        else if (asteroid.size < 1.4f)
+        {
+            score = score + 50; // medium asteroid
+        }
+        else
+        {
+            score = score + 10; ; // large asteroid
+        }
 
     }
 
