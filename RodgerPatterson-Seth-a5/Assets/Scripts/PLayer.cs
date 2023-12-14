@@ -7,8 +7,10 @@ public class PLayer : MonoBehaviour
     private bool Thrust;
     public float ThrustSpeed = 1;
     public float TurnSpeed = 1;
+    public float respawnInvulnerability = 3f;
     private float turnDirect;
     private Rigidbody2D RigidBody;
+
 
     public Bullet Bullet;
 
@@ -17,6 +19,13 @@ public class PLayer : MonoBehaviour
         RigidBody = GetComponent<Rigidbody2D>();
     }
 
+    private void OnEnable()
+    {
+        // Turn off collisions for a few seconds after spawning to ensure the
+        // player has enough time to safely move away from asteroids
+        TurnOffCollisions();
+        Invoke(nameof(TurnOnCollisions), respawnInvulnerability);
+    }
 
     // Update is called once per frame
     private void Update()
@@ -42,6 +51,17 @@ public class PLayer : MonoBehaviour
             Shoot();
         }
     }
+    private void TurnOffCollisions()
+    {
+        gameObject.layer = LayerMask.NameToLayer("IgnoreCollisions");
+    }
+
+    private void TurnOnCollisions()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Player");
+    }
+
+
 
     private void FixedUpdate()
     {
@@ -71,18 +91,21 @@ public class PLayer : MonoBehaviour
     }
 
 
+
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
         // Player Hits Asteroids (Dies)
-        if (collision.gameObject.tag == "Asteroid")
+        if (collision.gameObject.CompareTag("Asteroid"))
         {
             RigidBody.velocity = Vector3.zero;
-            RigidBody.angularDrag = 0.0f;
+            RigidBody.angularVelocity = 0.0f;
 
-            this.gameObject.SetActive(false);
 
-            
+
+            GameManager.Instance.PlayerDied(this);
         }
 
 

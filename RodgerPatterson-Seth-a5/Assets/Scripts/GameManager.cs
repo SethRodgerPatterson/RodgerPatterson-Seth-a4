@@ -4,16 +4,53 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-    public PLayer player;
+    public static GameManager Instance { get; private set; }
+    private PLayer player;
 
     public int lives = 3;
     public float respawnTime = 3f;
-    public void PlayerDied()
+    public float RespawnInvun = 3f;
+
+
+    private void Awake()
     {
-        this.lives--;
+        if (Instance != null)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    private void Respawn()
+    {
         
-        if (this.lives <= 0)
+        player.transform.position = Vector3.zero;
+        player.gameObject.SetActive(true);
+        
+
+
+    }
+
+    private void TurnCollisonsON()
+    {
+        this.player.gameObject.layer = LayerMask.NameToLayer("Player");
+    }
+
+    private void GameOver()
+    {
+
+    }
+    public void PlayerDied(PLayer player)
+    {
+        player.gameObject.SetActive(false);
+
+        lives--;
+
+        if (lives <= 0)
         {
             GameOver();
         }
@@ -23,16 +60,4 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
-    private void Respawn()
-    {
-        this.player.transform.position = Vector3.zero;
-        this.player.gameObject.SetActive(true);
-    }
-
-    private void GameOver()
-    {
-
-    }
-
 }
