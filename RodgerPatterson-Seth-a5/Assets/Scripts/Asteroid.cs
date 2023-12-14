@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Asteroid : MonoBehaviour
@@ -11,6 +12,8 @@ public class Asteroid : MonoBehaviour
     public float size = 1.0f;
     public float minSize = 0.5f;
     public float maxSize = 1.0f;
+    public float speed = 50f;
+    public float lifeTime = 40f;
 
 
     // Start is called before the first frame update
@@ -30,4 +33,11 @@ public class Asteroid : MonoBehaviour
 
         RigidBody.mass = this.size;
     }
+
+    public void SetTrajector(Vector3 direction)
+    {
+        RigidBody.AddForce(direction * this.speed);
+        Destroy(this.gameObject, this.lifeTime);
+    }
+
 }
