@@ -5,8 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public ParticleSystem Explostion;
     public PLayer player;
     public int lives = 3;
+    public int score = 0;
 
 
     private void Awake()
@@ -22,7 +24,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AsteroidDied(Asteroid asteroid)
+    {
+        Explostion.transform.position = asteroid.transform.position;
+        Explostion.Play();
 
+
+
+    }
 
     private void GameOver()
     {
@@ -31,6 +40,9 @@ public class GameManager : MonoBehaviour
     public void PlayerDied(PLayer player)
     {
         player.gameObject.SetActive(false);
+
+        Explostion.transform.position = this.player.transform.position;
+        Explostion.Play();
 
         lives--;
 
